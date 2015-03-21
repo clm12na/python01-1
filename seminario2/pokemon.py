@@ -1,4 +1,11 @@
 # -*- coding: utf-8 -*-
+# Realizado por:
+# David José Corral Plaza
+#
+#
+# Puede encontrar los comentarios del código en README.md
+# de la carpeta correspondiente al código.
+
 
 def areIn(list_aux, word):
     for wordAux in list_aux:
@@ -7,13 +14,23 @@ def areIn(list_aux, word):
         else:
             return False
 
+def equalOrNot(word,wordAux):
+    if word[len(word)-1] == wordAux[0]:
+        return True
+    else:
+        return False
 
 def foundNext(listf, list_aux, word):
     for wordAux in listf:
-        if areIn(list_aux, wordAux) == False and word[len(word)-1] == wordAux[0]:
+        if areIn(list_aux, wordAux) == False and equalOrNot(word,wordAux):
             return wordAux
     return ""
 
+def compareList(list_aux, list_sol):
+    if len(list_aux) > len(list_sol): 
+        return True
+    else:
+        return False
 
 def createList(fich):
     listf = []
@@ -23,19 +40,17 @@ def createList(fich):
             for word in line.split(' '): 
                 word = word.replace("\n","") 
                 listf += [word]
-    #Para cada línea del fichero, eliminamos los saltos de líneas y cargamos
-    #las palabras en la list principal.
-    
+
     for word in listf:
-        list_aux = [] # Borramos el contenido de la lista auxiliar
+        list_aux = []
         list_aux += [word]
-        siguiente = foundNext(listf, list_aux, word)
-        while siguiente != "": # Mientras encontremos una palabra que sea factible
-            list_aux += [siguiente] # La añadimos
-            word = siguiente # Actualizamos la palabra
-            siguiente = foundNext(listf, list_aux, word) # Buscamos la siguiente
+        nexto = foundNext(listf, list_aux, word)
+        while nexto != "": 
+            list_aux += [nexto]
+            word = nexto
+            nexto = foundNext(listf, list_aux, word)
     
-        if len(list_aux) > len(list_sol): # Si hemos obtenido más palabras en esta iteración
+        if compareList(list_aux,list_sol) == True:
             list_sol = list(list_aux)
 
 
