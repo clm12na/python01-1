@@ -54,6 +54,6 @@ def createList(fich):
             list_sol = list(list_aux)
 
 
-fichero = raw_input("Introduzca el nombre del fichero (ej. 'pokemon.txt'): ")
-print "Mayor lista encontrada: "
+fichero = raw_input("Introduzca el nombre del fichero (pokemon.txt): ")
+print "Mayor sucesión: "
 createList(fichero)
